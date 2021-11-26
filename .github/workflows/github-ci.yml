@@ -19,13 +19,16 @@ jobs:
       - name: Package application
         run: ./mvnw -ntp package -Pprod -DskipTests
   micro-frontends:
-    name: ${{ matrix.entities }} ${{ matrix.widgets }} micro frontend
+    name: ${{ matrix.entity }} ${{ matrix.widget }} micro frontend
     runs-on: ubuntu-latest
     timeout-minutes: 40
     strategy:
       matrix:
-        entities: [ conference ]
-        widgets: [ detailsWidget, formWidget, tableWidget ]
+        entity: [ conference ]
+        widget: [ detailsWidget, formWidget, tableWidget ]
+        exclude:
+          - entity: conference
+            widget: [formWidget, tableWidget]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.4
@@ -33,6 +36,6 @@ jobs:
           node-version: '14.15.0'
       - name: Run tests
         run: |
-          cd "$GITHUB_WORKSPACE/ui/widgets/${{ matrix.entities }}/${{ matrix.widgets }}"
+          cd "$GITHUB_WORKSPACE/ui/widgets/${{ matrix.entity }}/${{ matrix.widget }}"
           npm install
           npm test
