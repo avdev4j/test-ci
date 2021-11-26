@@ -36,7 +36,7 @@ jobs:
         run: |
           for widget in $WIDGETS
           do
-            cd "/ui/widgets/${{ matrix.entities }}/$widget"
+            cd "$GITHUB_WORKSPACE/ui/widgets/${{ matrix.entities }}/$widget"
             npm install
             npm test
           done
