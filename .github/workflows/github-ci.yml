@@ -24,8 +24,8 @@ jobs:
     timeout-minutes: 40
     strategy:
       matrix:
-        entities: [conference]
-        widgets: [detailsWidget, formWidget, tableWidget]
+        entities: [ conference ]
+        widgets: [ detailsWidget, formWidget, tableWidget ]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.4
@@ -33,9 +33,6 @@ jobs:
           node-version: '14.15.0'
       - name: Run tests
         run: |
-          for widget in $WIDGETS
-          do
-            cd "$GITHUB_WORKSPACE/ui/widgets/${{ matrix.entities }}/${{ matrix.widgets }}"
-            npm install
-            npm test
-          done
+          cd "$GITHUB_WORKSPACE/ui/widgets/${{ matrix.entities }}/${{ matrix.widgets }}"
+          npm install
+          npm test
