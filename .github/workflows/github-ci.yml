@@ -28,7 +28,7 @@ jobs:
         widget: [ detailsWidget, formWidget, tableWidget ]
         exclude:
           - entity: conference
-            widget: [formWidget, tableWidget]
+            widget: formWidget
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.4
