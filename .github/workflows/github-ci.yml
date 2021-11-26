@@ -19,7 +19,7 @@ jobs:
       - name: Package application
         run: ./mvnw -ntp package -Pprod -DskipTests
   micro-frontends:
-    name: ${{ matrix.app.entities }} micro frontends
+    name: ${{ matrix.entities }} micro frontends
     runs-on: ubuntu-latest
     timeout-minutes: 40
     strategy:
@@ -36,7 +36,7 @@ jobs:
         run: |
           for widget in $WIDGETS
           do
-            cd "/ui/widgets/${{ matrix.app.entities }}/$widget"
+            cd "/ui/widgets/${{ matrix.entities }}/$widget"
             npm install
             npm test
           done
